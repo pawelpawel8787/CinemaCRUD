@@ -68,7 +68,6 @@ public class ReservationDataInput extends JFrame {
 
 
         initBox();
-//        checkBoxesList();
         initReservation();
 
         comboBox1.addActionListener(new ActionListener() {
@@ -108,6 +107,8 @@ public class ReservationDataInput extends JFrame {
                         reservation.setShowing(chooser1);
                         reservationDAOImplement.addReservation(reservation);
                         result.setSelected(false);
+                        dispose();
+                        new ReservationDataInput();
 
                     }
 
@@ -118,11 +119,6 @@ public class ReservationDataInput extends JFrame {
         });
 
 
-    }
-
-    public void refresh(Reservation reservation) {
-        //make the changes to the table, then call fireTableChanged
-        revalidate();
     }
 
     public void initReservation() {
@@ -167,50 +163,11 @@ public class ReservationDataInput extends JFrame {
         });
     }
 
-
-    public void checkBoxesList() {
-
-        JCheckBox[] array = new JCheckBox[boxesPanel.getComponents().length];
-
-        for (int i = 0; i < boxesPanel.getComponents().length; i++) {
-            array[i] = ((JCheckBox) boxesPanel.getComponents()[i]);
-
-        }
-        ButtonGroup buttonGroupArray = new ButtonGroup();
-        for (int i = 0; i < array.length; i++) {
-            buttonGroupArray.add(array[i]);
-        }
-//        ArrayList<JCheckBox> homeCbxs = new ArrayList<>();
-//        for (int i = 0; i <boxesPanel.getComponents().length; i++) {
-//            homeCbxs.add((JCheckBox)boxesPanel.getComponents()[i]);
-//        }
-//
-//        ButtonGroup buttonGroup = new ButtonGroup();
-//
-//        for (int i = 0; i <homeCbxs.size() ; i++) {
-//            buttonGroup.add(homeCbxs.get(i));
-//
-//        }
-
-    }
-
-
     private void initBox() {
 
         MovieDAOImplement movieDAOImplement = new MovieDAOImplement();
         comboBox1.setModel(new ComboBoxModelInit(movieDAOImplement.getMovieList()));
         comboBox1.setSelectedItem(ListSelectionModel.SINGLE_SELECTION);
-
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("App");
-        frame.setContentPane(new ReservationDataInput().panel1);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(1000, 800);
-
 
     }
 }
